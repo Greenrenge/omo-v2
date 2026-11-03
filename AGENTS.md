@@ -1,13 +1,13 @@
 # oh-my-opencode — OpenCode Plugin
 
-> **NO PRs TO UPSTREAM (binding, 2026-11-03).** Every agent, script, skill, or CLI flow
-> operating on this repository MUST work strictly locally: local branches, local worktrees
-> (`ghq/github.com/fazulfi/omo-v2-wt/`), local commits. NEVER open a pull request, push a
-> branch, create a fork, or deliver anything back to `fazulfi/omo-v2` or to the upstream
-> `code-yeongyu/oh-my-openagent`. The account `Greenrenge` has pull-only access to
-> `fazulfi/omo-v2` (pushes are rejected), and the fork `Greenrenge/omo-v2` plus any PRs
-> from it are forbidden. To share work, produce a `git format-patch` file or a plain diff
-> in the working directory — never push, never PR.
+> **NO PRs TO UPSTREAM (binding, 2026-11-03; updated 2026-11-03, fork-push allowed).**
+> NEVER open a pull request, push a branch, or deliver anything back to `fazulfi/omo-v2`
+> (the account `Greenrenge` has pull-only access there) or to the upstream
+> `code-yeongyu/oh-my-openagent`. The single sanctioned shared remote is
+> `origin` = `https://github.com/Greenrenge/omo-v2.git` (the account's own fork):
+> push local branches there freely; never merge or PR into `fazulfi/omo-v2` or
+> `code-yeongyu/oh-my-openagent` from it. Still prefer local branches + local worktrees
+> (`ghq/github.com/fazulfi/omo-v2-wt/`) for day-to-day work.
 > Enforced skill: `.agents/skills/no-pr-to-upstream/SKILL.md`.
 
 > **V2 PORT NOTE (2026-10-01, fork `fazulfi/omo-v2`):** This fork is a **V2-only port** of the OMC plugin to `@opencode/plugin@2.0.20` + `@opencode/client@2.0.20`. The port surface lives in `packages/omo-opencode/src/v2/` (see `README.md` and `docs/v2-api-mapping.md`). The V1-line source described throughout the rest of this document was **removed** (2,493 files, task 18); paths such as `src/testing/create-plugin-module.ts`, `src/features/*`, `src/hooks/*`, `src/tools/*`, and `src/plugin/*` **no longer exist** in this fork — they refer to the pre-port architecture preserved in git history. For current structure, entry points, and verification, read `README.md` first.
@@ -69,7 +69,7 @@ This is repeated on purpose, because it is the single most ignored rule in this 
 
 ## DEFAULT WORKFLOW — how to take on any task
 
-Unless the user EXPLICITLY says otherwise, or the task is an urgent must-fix-now hotfix, deliver every change through an isolated git worktree with evidence-bound manual QA and a local reviewer-readable summary. **All PRs/merges are LOCAL acknowledgement only — see "NO PRs TO UPSTREAM" at the top of this file: never push, never open a PR on GitHub, never target `fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent`.** Do NOT hand-commit normal work straight to the main local branch.
+Unless the user EXPLICITLY says otherwise, or the task is an urgent must-fix-now hotfix, deliver every change through an isolated git worktree with evidence-bound manual QA and a local reviewer-readable summary. **All PRs/merges are LOCAL acknowledgement only — see "NO PRs TO UPSTREAM" at the top of this file: never push or open a PR on GitHub against `fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent`; pushing to `origin` (`https://github.com/Greenrenge/omo-v2.git`) is the sanctioned way to share work.** Do NOT hand-commit normal work straight to the main local branch.
 
 - **QA is the evidence gate, scoped to what you touched.** A change under `packages/omo-opencode/` MUST run the **`opencode-qa`** skill; a change under `packages/omo-codex/` (lazycodex) MUST run the **`codex-qa`** skill; a change under `packages/omo-senpi/` or `packages/senpi-task/` MUST run the **`senpi-qa`** skill (see the QA section above for each). Run the matching skill, and treat its captured output (written under the gitignored `.omo/evidence/`, summarized in the PR body, never committed) as the QA evidence `work-with-pr` requires. A change touching more than one runs each.
 - **Conflicts → `smart-rebase`.** If the worktree branch conflicts with its base, resolve it with the **`smart-rebase`** skill, then re-run the scoped QA. Never hand-resolve by force-pushing shared history.
@@ -429,7 +429,7 @@ Cross-harness, one-command dev setup. The **single source of truth** is [`script
 - **This section applies to LOCAL branch flow only.** No GitHub PRs. See "NO PRs TO UPSTREAM" at the top of this file.
 - Local feature branch into the local base branch MUST be landed with a merge commit: `git merge --no-ff <feature-branch>`.
 - **NEVER squash merge or rebase merge** feature branches into the base, even if a generic workflow, skill, or default suggests it.
-- **NEVER use `gh pr merge --admin` or any required-check override. Never push to any remote of this repo.** Do not request or act on authorization to bypass a gate.
+- **NEVER use `gh pr merge --admin` or any required-check override. Never push to remotes other than `origin` (`https://github.com/Greenrenge/omo-v2.git`), which stays push-safe; keep `fazulfi/omo-v2` and `code-yeongyu/oh-my-openagent` untouched.** Do not request or act on authorization to bypass a gate.
 - A check that is already red on the local base branch is a base-branch defect and remains a merge blocker. Inspect it, reproduce the failure on the matching platform and toolchain, root-fix it in the current branch or a separate atomic local branch, rebase onto the repaired base, rerun every check, and record the evidence.
 - Reducing the failure count is not a green result. Never make a gate disappear through `test.skip`, weakened assertions, retry loops, `continue-on-error`, platform or shell exclusion, or an environment-specific workaround.
 
