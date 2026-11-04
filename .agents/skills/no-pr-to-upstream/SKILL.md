@@ -1,40 +1,36 @@
 ---
 name: no-pr-to-upstream
-description: Hard rule for this machine. NEVER open a pull request, push a branch, or in any way deliver code or docs back to the upstream repos fazulfi/omo-v2 and code-yeongyu/oh-my-openagent. The sanctioned shared remote is the origin fork https://github.com/Greenrenge/omo-v2.git — push local branches there, never PR/merge into the upstreams. Use when about to create a PR, push a branch, or commit to a shared remote.
+description: Contribution rule for this machine. Contributions to fazulfi/omo-v2 are fork-branch pull requests from the Greenrenge account — push branches to the fork origin (https://github.com/Greenrenge/omo-v2.git), then gh pr create against fazulfi/omo-v2. Direct pushes to fazulfi/omo-v2 are pull-only and stay forbidden, as does anything toward code-yeongyu/oh-my-openagent. Use when about to create a PR, push a branch, or commit to a shared remote.
 ---
 
-# NO PRs TO UPSTREAM — fazulfi/omo-v2
+# PRs TO UPSTREAM VIA THE FORK — fazulfi/omo-v2
 
 ## The rule
 
-**NEVER open a pull request, push a branch, or deliver anything back to
-`fazulfi/omo-v2` (or the upstream `code-yeongyu/oh-my-openagent`). Not even
-a "harmless" docs PR. Not even if the maintainer seemingly invited PRs.**
+**Contributions to `fazulfi/omo-v2` go through pull requests from the
+`Greenrenge` fork. Push branches to the fork, open PRs from it.**
 
-The account `Greenrenge` has **pull-only access** to `fazulfi/omo-v2` — the
-earlier attempt to `git push` was rejected by GitHub ("Permission to
-fazulfi/omo-v2.git denied to Greenrenge").
+**Updated 2026-11-04 by the user: PRs upstream CAN be done on the Greenrenge
+account.** Opening pull requests on `fazulfi/omo-v2` from
+`Greenrenge/<branch>` heads is allowed. The GitHub access level is unchanged:
+direct pushes to `fazulfi/omo-v2` are still rejected (pull-only), which is why
+every contribution is a fork-branch PR.
 
-**Updated 2026-11-03 by the user:** the fork `Greenrenge/omo-v2` is the ONE
-sanctioned shared remote. The local `origin` now points at
-`https://github.com/Greenrenge/omo-v2.git` and pushing local branches there is
-allowed (and expected as the backup/share channel). Opening or merging PRs on
-`fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent` remains forbidden.
-
-## What this forbids
-
-- `gh pr create --repo fazulfi/omo-v2 ...`
-- `gh pr create --repo code-yeongyu/oh-my-openagent ...`
-- Any push to `fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent` (fetch is fine).
-- Opening PRs on any mirror/vendor of the plugin (`oh-my-opencode`,
-  `oh-my-openagent`, `lazycodex` npm/GitHub identities).
-- Reopening the three PRs this session created (#1, #2, #3 on
-  `fazulfi/omo-v2`).
-
-## What is allowed (and expected)
+## What this allows
 
 - `git push origin <branch>` where `origin` =
   `https://github.com/Greenrenge/omo-v2.git` (the account's own fork).
+- `gh pr create --repo fazulfi/omo-v2 --head Greenrenge:<branch> ...`
+- Commenting on, editing, closing and reopening PRs on `fazulfi/omo-v2`
+  (including the earlier PRs #1–#3, which are legitimate under this rule).
+
+## What is still forbidden
+
+- Any direct push to `fazulfi/omo-v2` (GitHub rejects it; fetch is fine).
+- Any push or PR to `code-yeongyu/oh-my-openagent` (the true upstream) —
+  extend this rule explicitly if that ever changes.
+- PRs to mirror/vendor identities of the plugin (`oh-my-opencode`,
+  `oh-my-openagent`, `lazycodex` npm/GitHub identities).
 
 ## What to do for local work
 
