@@ -1,13 +1,13 @@
 # oh-my-opencode — OpenCode Plugin
 
-> **NO PRs TO UPSTREAM (binding, 2026-11-03; updated 2026-11-03, fork-push allowed).**
-> NEVER open a pull request, push a branch, or deliver anything back to `fazulfi/omo-v2`
-> (the account `Greenrenge` has pull-only access there) or to the upstream
-> `code-yeongyu/oh-my-openagent`. The single sanctioned shared remote is
-> `origin` = `https://github.com/Greenrenge/omo-v2.git` (the account's own fork):
-> push local branches there freely; never merge or PR into `fazulfi/omo-v2` or
-> `code-yeongyu/oh-my-openagent` from it. Still prefer local branches + local worktrees
-> (`ghq/github.com/fazulfi/omo-v2-wt/`) for day-to-day work.
+> **PRIVATE WORK — FORK ONLY (binding, updated 2026-11-05).**
+> This work is the private side now: never open PRs on, push to, or deliver anything to
+> `fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent` — we don't touch the genuine repos
+> anymore. The canonical private remote is `origin` = `https://github.com/Greenrenge/omo-v2.git`:
+> push branches there freely and integrate by merging validated branches into the fork's
+> `port/v2` locally (tsgo + build + v2 tests green before pushing). Closing our own stray
+> PRs on the genuine repos is the one allowed exception (PRs #1–#6 there are closed, keep
+> them closed). Day-to-day work stays in local branches + local worktrees.
 > Enforced skill: `.agents/skills/no-pr-to-upstream/SKILL.md`.
 
 > **V2 PORT NOTE (2026-10-01, fork `fazulfi/omo-v2`):** This fork is a **V2-only port** of the OMC plugin to `@opencode/plugin@2.0.20` + `@opencode/client@2.0.20`. The port surface lives in `packages/omo-opencode/src/v2/` (see `README.md` and `docs/v2-api-mapping.md`). The V1-line source described throughout the rest of this document was **removed** (2,493 files, task 18); paths such as `src/testing/create-plugin-module.ts`, `src/features/*`, `src/hooks/*`, `src/tools/*`, and `src/plugin/*` **no longer exist** in this fork — they refer to the pre-port architecture preserved in git history. For current structure, entry points, and verification, read `README.md` first.

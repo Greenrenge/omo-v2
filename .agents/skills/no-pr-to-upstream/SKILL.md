@@ -1,34 +1,32 @@
 ---
 name: no-pr-to-upstream
-description: Contribution rule for this machine. Contributions to fazulfi/omo-v2 are fork-branch pull requests from the Greenrenge account — push branches to the fork origin (https://github.com/Greenrenge/omo-v2.git), then gh pr create against fazulfi/omo-v2. Direct pushes to fazulfi/omo-v2 are pull-only and stay forbidden, as does anything toward code-yeongyu/oh-my-openagent. Use when about to create a PR, push a branch, or commit to a shared remote.
+description: Private-work rule for this machine (2026-11-05). All omo-v2 work is PRIVATE and lives on the Greenrenge fork origin (https://github.com/Greenrenge/omo-v2.git) — push branches there, integrate by merging them into the fork port/v2 locally. NEVER open PRs on, push to, or comment-deliver to fazulfi/omo-v2 or code-yeongyu/oh-my-openagent; closing our own already-open PRs there is the one allowed exception. Use when about to create a PR, push a branch, or commit to a shared remote.
 ---
 
-# PRs TO UPSTREAM VIA THE FORK — fazulfi/omo-v2
+# PRIVATE WORK — the Greenrenge fork is canonical
 
 ## The rule
 
-**Contributions to `fazulfi/omo-v2` go through pull requests from the
-`Greenrenge` fork. Push branches to the fork, open PRs from it.**
+**Updated 2026-11-05 by the user: this work is the private side now. Do not
+keep anything inherited from the genuine repos that blocks us, and do not
+touch the genuine repos anymore.**
 
-**Updated 2026-11-04 by the user: PRs upstream CAN be done on the Greenrenge
-account.** Opening pull requests on `fazulfi/omo-v2` from
-`Greenrenge/<branch>` heads is allowed. The GitHub access level is unchanged:
-direct pushes to `fazulfi/omo-v2` are still rejected (pull-only), which is why
-every contribution is a fork-branch PR.
+`origin` = `https://github.com/Greenrenge/omo-v2.git` is the canonical
+private remote. Feature branches push there and integrate by merging into
+the fork's `port/v2` locally (validated: tsgo + build + v2 tests) — no
+pull requests anywhere.
 
-## What this allows
+## What is allowed
 
-- `git push origin <branch>` where `origin` =
-  `https://github.com/Greenrenge/omo-v2.git` (the account's own fork).
-- `gh pr create --repo fazulfi/omo-v2 --head Greenrenge:<branch> ...`
-- Commenting on, editing, closing and reopening PRs on `fazulfi/omo-v2`
-  (including the earlier PRs #1–#3, which are legitimate under this rule).
+- `git push origin <branch>` and merging validated branches into `origin/port/v2`.
+- Fetching from anywhere (read-only).
 
-## What is still forbidden
+## What is forbidden
 
-- Any direct push to `fazulfi/omo-v2` (GitHub rejects it; fetch is fine).
-- Any push or PR to `code-yeongyu/oh-my-openagent` (the true upstream) —
-  extend this rule explicitly if that ever changes.
+- Opening, reopening, commenting on, or editing PRs on `fazulfi/omo-v2` or
+  `code-yeongyu/oh-my-openagent`. (PRs #1–#6 there are closed and stay
+  closed; closing our own strays was the one cleanup exception.)
+- Any push to `fazulfi/omo-v2` or `code-yeongyu/oh-my-openagent`.
 - PRs to mirror/vendor identities of the plugin (`oh-my-opencode`,
   `oh-my-openagent`, `lazycodex` npm/GitHub identities).
 
